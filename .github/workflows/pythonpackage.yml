@@ -21,28 +21,30 @@ jobs:
     - name: Install dependencies
       run: |
         brew update && brew install gmp boost || echo ""
-        sh install.sh
+        python3 -m venv venv
+        source venv/bin/activate
+        mkdir dist
+        cd dist
+        pip wheel ..
+        pip wheel ../lib/chiapos
+        pip install *whl
+        cd ..
     - name: Test proof of space
       run: |
-        cd lib/chiapos
-        mkdir -p build && cd build
-        cmake ../
-        cmake --build . -- -j 6
-        ./RunTests
-        cd ../../../
+        lib/chiapos/build/RunTests
     - name: Test vdf
       run: |
-        . .venv/bin/activate
+        source venv/bin/activate
         cd lib/chiavdf/fast_vdf
         python python_bindings/test_verifier.py
         cd ../../../
     - name: Lint source with flake8
       run: |
-        ./.venv/bin/flake8 src
+        ./venv/bin/flake8 src
     - name: Lint source with mypy
       run: |
-        ./.venv/bin/mypy src tests
+        ./venv/bin/mypy src tests
     - name: Test blockchain code with pytest
       run: |
-        ./.venv/bin/py.test tests -s -v
+        ./venv/bin/py.test tests -s -v
 
