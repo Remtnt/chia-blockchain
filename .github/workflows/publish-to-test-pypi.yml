@@ -9,6 +9,10 @@ jobs:
     name: Build and publish Python distributions to PyPI and TestPyPI
     runs-on: ubuntu-18.04
 
+    strategy:
+      matrix:
+        base: [".", "lib/bip158", "lib/chiapos", "lib/chiavdf/fastvdf", "lib/py-setproctitle"]
+
     steps:
     - uses: actions/checkout@master
     - name: Set up Python 3.7
@@ -27,35 +31,7 @@ jobs:
         pep517.build
         --binary
         --out-dir dist/
-        .
-    - name: Build a binary wheel and a source tarball
-      run: >-
-        python -m
-        pep517.build
-        --binary
-        --out-dir dist/
-        lib/bip158
-    - name: Build a binary wheel and a source tarball
-      run: >-
-        python -m
-        pep517.build
-        --binary
-        --out-dir dist/
-        lib/chiapos
-    - name: Build a binary wheel and a source tarball
-      run: >-
-        python -m
-        pep517.build
-        --binary
-        --out-dir dist/
-        lib/chiavdf
-    - name: Build a binary wheel and a source tarball
-      run: >-
-        python -m
-        pep517.build
-        --binary
-        --out-dir dist/
-        lib/py-setproctitle
+        ${{ matrix.base }}
     - name: Publish distribution to Test PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
