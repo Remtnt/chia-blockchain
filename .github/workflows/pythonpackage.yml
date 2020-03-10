@@ -9,8 +9,8 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7, 3.8]
-        os: [ubuntu-latest, macOS-latest]
+        python-version: [3.7]
+        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v1
@@ -23,21 +23,17 @@ jobs:
         brew update && brew install gmp boost || echo ""
         python3 -m venv venv
         source venv/bin/activate
-        mkdir dist
-        cd dist
-        pip wheel ..
-        pip wheel ../lib/bip158
-        pip wheel ../lib/chiapos
-        pip wheel ../lib/chiavdf/fast_vdf
-        pip wheel ../lib/py-setproctitle
-        pip install *whl
-        cd ..
+        pip install ./lib/py-setproctitle
+        pip install .
     - name: Test proof of space
       run: |
+        source venv/bin/activate
+        pip wheel ../lib/chiapos
         lib/chiapos/build/RunTests
     - name: Test vdf
       run: |
         source venv/bin/activate
+        pip wheel ../lib/chiavdf/fast_vdf
         cd lib/chiavdf/fast_vdf
         python python_bindings/test_verifier.py
         cd ../../../

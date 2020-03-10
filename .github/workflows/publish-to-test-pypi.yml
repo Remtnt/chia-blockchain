@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        base: [".", "lib/bip158", "lib/chiapos", "lib/chiavdf/fastvdf", "lib/py-setproctitle"]
+        base: [".", "lib/chiapos", "lib/chiavdf/fast_vdf", "lib/py-setproctitle"]
 
     steps:
     - uses: actions/checkout@master
