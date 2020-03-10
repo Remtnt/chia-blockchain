@@ -1,10 +1,15 @@
 from dataclasses import dataclass
 from typing import List
 
-from chiavdf import verify
-from lib.chiavdf.inkfish.classgroup import ClassGroup
-from lib.chiavdf.inkfish.create_discriminant import create_discriminant
-from lib.chiavdf.inkfish.proof_of_time import check_proof_of_time_nwesolowski
+try:
+    from chiavdf import verify
+except ImportError:
+    verify = None
+
+
+from src.inkfish.classgroup import ClassGroup
+from src.inkfish.create_discriminant import create_discriminant
+from src.inkfish.proof_of_time import check_proof_of_time_nwesolowski
 from src.types.classgroup import ClassgroupElement
 from src.types.sized_bytes import bytes32
 from src.util.ints import uint8, uint64
@@ -33,7 +38,7 @@ class ProofOfTime(Streamable):
             self.witness_type,
         )
 
-    def is_valid(self, discriminant_size_bits):
+    def is_valid_fast(self, discriminant_size_bits):
         return verify(
             discriminant_size_bits,
             self.challenge_hash,
@@ -43,3 +48,6 @@ class ProofOfTime(Streamable):
             bytes(self.witness),
             self.witness_type,
         )
+
+    # create is_valid at runtime
+    is_valid = is_valid_fast if verify else is_valid_slow

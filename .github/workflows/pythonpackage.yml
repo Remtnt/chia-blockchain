@@ -26,7 +26,10 @@ jobs:
         mkdir dist
         cd dist
         pip wheel ..
+        pip wheel ../lib/bip158
         pip wheel ../lib/chiapos
+        pip wheel ../lib/chiavdf/fast_vdf
+        pip wheel ../lib/py-setproctitle
         pip install *whl
         cd ..
     - name: Test proof of space

@@ -3,10 +3,17 @@ import argparse
 import sys
 import time
 
-from lib.chiavdf.inkfish.proof_of_time import create_proof_of_time_nwesolowski
+from .classgroup import ClassGroup
+from .create_discriminant import create_discriminant
+from .proof_of_time import (
+    check_proof_of_time_nwesolowski,
+    check_proof_of_time_pietrzak,
+    check_proof_of_time_wesolowski,
+    create_proof_of_time_nwesolowski,
+    create_proof_of_time_pietrzak,
+    create_proof_of_time_wesolowski,
+)
 
-from lib.chiavdf.inkfish.classgroup import ClassGroup
-from lib.chiavdf.inkfish.create_discriminant import create_discriminant
 from src.types.classgroup import ClassgroupElement
 
 
@@ -58,7 +65,7 @@ def main():
             ok = check_proof_of_time_wesolowski(
                 discriminant, x, args.proof, args.iterations, args.length)
         elif args.type == "n-wesolowski":
-           ok = check_proof_of_time_nwesolowski(
+            ok = check_proof_of_time_nwesolowski(
                 discriminant, x, args.proof, args.iterations, args.length)
         elif args.type == "pietrzak":
             ok = check_proof_of_time_pietrzak(

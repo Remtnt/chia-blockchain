@@ -1,4 +1,4 @@
-from lib.chiavdf.inkfish import mod
+from . import mod
 
 
 class ClassGroup(tuple):
@@ -125,9 +125,9 @@ class ClassGroup(tuple):
         k = k_temp + constant_factor * n
         l = (t * k - h) // s
         m = (t * u * k - h * u - s * c1) // (s * t)
-        #assert m * s * t == t * u * k - h * u - s * c1
-        #assert u * l == t * m + c1
-        #assert (t * u * k - h * u - s * c1) % (s * t) == 0
+        # assert m * s * t == t * u * k - h * u - s * c1
+        # assert u * l == t * m + c1
+        # assert (t * u * k - h * u - s * c1) % (s * t) == 0
 
         a3 = s * t - r * u
         b3 = (j * u + m * r) - (k * t + l * s)

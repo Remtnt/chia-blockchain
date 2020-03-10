@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from setuptools import setup
 
 dependencies = [
@@ -10,9 +9,8 @@ dependencies = [
     "miniupnpc",        # Allows users to open ports on their router
     "aiosqlite",        # asyncio wrapper for sqlite, to store blocks
     "aiohttp",          # HTTP server for full node rpc
-    "setuptools-scm",   # Used for versioning
     "prompt-toolkit",   # Used to create a terminal based UI for full node
-    "colorlog"          # Adds color to logs
+    "colorlog",         # Adds color to logs
 ]
 dev_dependencies = [
     "pytest",
@@ -32,10 +30,14 @@ setup(
     license="Apache License",
     python_requires=">=3.7, <4",
     packages=[
+        "definitions",
         "src",
+        "src.cmds",
         "src.consensus",
+        "src.inkfish",
         "src.protocols",
         "src.rpc",
+        "src.server",
         "src.server",
         "src.types",
         "src.ui",

@@ -210,7 +210,7 @@ sh install_timelord.sh
 ## Step 3: Generate keys
 First, create some keys by running the following script:
 ```bash
-python -m scripts.regenerate_keys
+python -m src.cmds.regenerate_keys
 ```
 
 
@@ -234,7 +234,7 @@ can take a long time depending on the [size of the plots](https://github.com/Chi
 which you can ssh into to view the node UI (previous ssh command). You can also change the working directory and
 final directory for plotting, with the "-t" and "-d" arguments to the create_plots script.
 ```bash
-python -m scripts.create_plots -k 20 -n 10
+python -m src.cmds.create_plots -k 20 -n 10
 sh ./scripts/run_farming.sh
 ```
 
