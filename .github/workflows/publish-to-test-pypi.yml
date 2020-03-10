@@ -28,7 +28,7 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: dist
-        path: dist
+        path: ${{ matrix.base }}/dist
     - name: Publish distribution to Test PyPI
       if: 0
       uses: pypa/gh-action-pypi-publish@master
