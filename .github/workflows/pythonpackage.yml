@@ -23,17 +23,17 @@ jobs:
         brew update && brew install gmp boost || echo ""
         python3 -m venv venv
         source venv/bin/activate
-        pip install ./lib/py-setproctitle
+        pip install lib/py-setproctitle
         pip install .
     - name: Test proof of space
       run: |
         source venv/bin/activate
-        pip wheel ../lib/chiapos
+        pip wheel lib/chiapos
         lib/chiapos/build/RunTests
     - name: Test vdf
       run: |
         source venv/bin/activate
-        pip wheel ../lib/chiavdf/fast_vdf
+        pip wheel lib/chiavdf/fast_vdf
         cd lib/chiavdf/fast_vdf
         python python_bindings/test_verifier.py
         cd ../../../
