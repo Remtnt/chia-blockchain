@@ -28,8 +28,9 @@ jobs:
     - name: Test proof of space
       run: |
         source venv/bin/activate
-        pip install -e lib/chiapos
-        lib/chiapos/build/RunTests
+        cd lib/chiapos
+        python setup.py build
+        build/*/RunTests
     - name: Test vdf
       run: |
         source venv/bin/activate
